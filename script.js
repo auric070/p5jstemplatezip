@@ -1,54 +1,56 @@
-class Boom {
-  constructor(td,kl,x,kls) {
-  this.leeftijd = td;
-  this.kleur = kl;
-  this.x = x;
-  this.KleurStam = kls;
-  }
-
-  groei() {
-    if (this.leeftijd < 20) {
-      this.leeftijd++;
-    }
-  }
-
-  teken() {
-    push();
-    translate(this.x,375);
-    fill(this.KleurStam);
-    rect(0,0,20 + 2*this.leeftijd,-100 - 10*this.leeftijd);
-    fill(this.kleur);
-    ellipse((20 + 2*this.leeftijd) / 2,-90 - 5*this.leeftijd,80 + 4*this.leeftijd,130 + 10*this.leeftijd);
-    pop();
-  }
-}
+var aantalLagen = 5;
+var breedte = 90;
+var hoogte;
 
 function setup() {
-  canvas = createCanvas(800,400);
+  hoogte = breedte / 2;
+  canvas = createCanvas(800,600);
   canvas.parent();
-  noStroke();
-  frameRate(1);
-
-  boom1 = new Boom(1,'olive',130 ,'brown');
-  boom2 = new Boom(5,'forestgreen',300 ,'burlywood');
-  boom3 = new Boom(3,'yellowgreen',600 ,'black');
-  boom4 = new Boom(4, 'lime' ,230 ,'green');
-  boom5 = new Boom(2, 'lightgreen' ,720 ,'blue');
+  noLoop();
 }
 
 function draw() {
-  background('orange');
-  fill('wheat');
-  rect(0,350,canvas.width,canvas.height - 350);
-  boom1.teken();
-  boom2.teken();
-  boom3.teken();
-  boom4.teken();
-  boom5.teken();
+    tekenKamer(1);
+}
 
-  boom1.groei();
-  boom2.groei();
-  boom3.groei();
-  boom4.groei();
-  boom5.groei();
+function tekenKamer(s) {
+    scale(s);
+    fill('pink');
+    noStroke();
+    rect(0,0,800,600);
+    fill('salmon');
+    rect(0,0,400,600);
+    stroke(1);
+    fill('mediumseagreen');
+    rect(50,200,250,400);
+    fill('lightyellow');
+    rect(70,220,210,160);
+    noStroke();
+    fill('brown');
+    ellipse(600,525,150);
+    translate(170,100);
+    tekenBloem();
+    translate(-170,-100);
+    fill('black');
+    rect(340,90,420,320);
+
+    translate(350,100);
+    tekenKamer(0.5);
+}
+
+function tekenBloem() {
+    var aantal = 25;
+     push();
+     colorMode(RGB, 255, 255, 255, 1);
+     fill(178, 34, 34,.7);
+     for (var n = 0;n < aantal;n++) {
+         ellipse(0,0,150,20);
+         rotate(360 / aantal);
+     }
+     fill(255, 195, 0,.5);
+     for (var n = 0;n < aantal;n++) {
+         rect(0,0,35,35)
+         rotate(360 / aantal);
+     }
+     pop();
 }
